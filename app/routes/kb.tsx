@@ -2,18 +2,13 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 
-import { requireUserId } from "~/session.server";
-import { useUser } from "~/utils";
-import { getNoteListItems } from "~/models/note.server";
-
 type LoaderData = {
   articles: { id: string; title: string }[];
-  //   articles: Awaited<ReturnType<typeof getNoteListItems>>;
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  //   const userId = await requireUserId(request);
-  //   const articles = await getNoteListItems({ userId });
+  // For now, we hard-code the menu items.
+  // Later, they will be populated from a database.
   const articles = [
     { id: "abc123", title: "How to Clean the Water Heater" },
     { id: "bcd123", title: "How to Refill the Water Softener" },
@@ -24,7 +19,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function KnowledgebasePage() {
   const data = useLoaderData() as LoaderData;
-  //   const user = useUser();
 
   return (
     <div className="flex h-full min-h-screen flex-col">
@@ -32,7 +26,6 @@ export default function KnowledgebasePage() {
         <h1 className="text-3xl font-bold">
           <Link to=".">Knowledgebase Articles</Link>
         </h1>
-        {/* <p>{user.email}</p> */}
         <Form action="/logout" method="post">
           <button
             type="submit"
