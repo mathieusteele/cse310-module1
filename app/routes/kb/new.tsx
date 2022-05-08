@@ -3,7 +3,6 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
 
-// import { createNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 
 interface ArticleParams {
@@ -27,6 +26,7 @@ type ActionData = {
   };
 };
 
+// Action Functions handle the form submission
 export const action: ActionFunction = async ({ request }) => {
   const userId = await requireUserId(request);
 
@@ -61,6 +61,7 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect(`/kb/${note.id}`);
 };
 
+// Render the form
 export default function NewArticlePage() {
   const actionData = useActionData() as ActionData;
   const titleRef = React.useRef<HTMLInputElement>(null);

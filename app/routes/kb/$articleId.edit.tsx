@@ -4,9 +4,6 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useActionData, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-// import type { Note } from "~/models/note.server";
-// import { deleteArticle } from "~/models/note.server";
-// import { getNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 
 type ActionData = {
@@ -33,6 +30,8 @@ interface ArticleParams {
   id: string;
 }
 
+// Load data for the form.
+// Will later come from a database
 export const getArticle: Function = async ({ userId, id }: ArticleParams) => {
   if (id === "abc123") {
     return {

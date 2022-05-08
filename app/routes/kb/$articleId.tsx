@@ -24,6 +24,7 @@ interface ArticleParams {
   id: string;
 }
 
+// At this phase, the content is hard-coded but will later come from a database
 export const getArticle: Function = async ({ userId, id }: ArticleParams) => {
   if (id === "abc123") {
     return {
@@ -87,6 +88,7 @@ export const deleteArticle: Function = async (userId: string, id: string) => {
   console.log(`deleting:  + ${userId} + ${id}`);
 };
 
+// Get article from the id in the URL
 export const loader: LoaderFunction = async ({ request, params }) => {
   const userId = await requireUserId(request);
   invariant(params.articleId, "articleId not found");
@@ -98,6 +100,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json<LoaderData>({ article });
 };
 
+// Mock deletes
 export const action: ActionFunction = async ({ request, params }) => {
   const userId = await requireUserId(request);
   invariant(params.articleId, "articleId not found");
@@ -115,14 +118,14 @@ export default function ArticleDetailsPage() {
       <h3 className="text-2xl font-bold">{data.article.title}</h3>
       <p className="py-6">{data.article.body}</p>
       <hr className="my-4" />
-      <Form method="post" className="inline px-2">
+      <div className="inline px-2">
         <Link
           to="edit"
           className="rounded bg-blue-500  py-2 px-4 text-white hover:bg-blue-600 focus:bg-blue-400"
         >
           Edit
         </Link>
-      </Form>
+      </div>
       <Form method="post" className="inline px-2">
         <button
           type="submit"
@@ -135,6 +138,7 @@ export default function ArticleDetailsPage() {
   );
 }
 
+// show more helpful messages
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
 
