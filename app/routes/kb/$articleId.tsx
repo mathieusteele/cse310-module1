@@ -3,9 +3,6 @@ import { json, redirect } from "@remix-run/node";
 import { Form, Link, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-// import type { Note } from "~/models/note.server";
-// import { deleteArticle } from "~/models/note.server";
-// import { getNote } from "~/models/note.server";
 import { requireUserId } from "~/session.server";
 
 type Article = {
