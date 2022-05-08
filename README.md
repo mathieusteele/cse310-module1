@@ -15,13 +15,9 @@ Collaborators who wish to install this project on their own computer should foll
   ```sh
   npm run dev
   ```
-- Open web browser to http://localhost:3001 to view the site.
+- Open web browser to [http://localhost:3001](http://localhost:3001) to view the site.
 
-The demo video is available at:
-
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running (starting the server and navigating through the web pages) and a walkthrough of the code.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+The demo video is available at: [Software Demo Video](https://youtu.be/1b-K10Y9A2A)
 
 # Web Pages
 
