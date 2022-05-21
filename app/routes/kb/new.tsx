@@ -3,20 +3,8 @@ import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
 
+import { createArticle, createTag } from "~/models/article.server";
 import { requireUserId } from "~/session.server";
-
-interface ArticleParams {
-  userId: string;
-  id: string;
-}
-
-export const createArticle: Function = async ({
-  userId,
-  id,
-}: ArticleParams) => {
-  console.log("Would create the article here");
-  return { id: "abc123" };
-};
 
 type ActionData = {
   errors?: {
@@ -56,9 +44,19 @@ export const action: ActionFunction = async ({ request }) => {
     );
   }
 
-  const note = await createArticle({ title, body, userId });
+  const article = await createArticle({ title, body, userId });
 
-  return redirect(`/kb/${note.id}`);
+  var tag_array = tags.replace(/\r\n/g, "\n").split("\n");
+
+  for (const tag of tag_array) {
+    await createTag({
+      name: tag,
+      articleId: article.id,
+      userId,
+    });
+  }
+
+  return redirect(`/kb/${article.id}`);
 };
 
 // Render the form
