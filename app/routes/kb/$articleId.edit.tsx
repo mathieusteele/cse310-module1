@@ -156,6 +156,7 @@ export default function ArticleEditPage() {
 
   return (
     <>
+      <h1 className="mb-6 text-4xl font-bold">Editing Article</h1>
       <Form
         method="post"
         style={{
@@ -208,28 +209,6 @@ export default function ArticleEditPage() {
           )}
         </div>
 
-        {/* <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>Tags (each on a line): </span>
-          <textarea
-            ref={tagsRef}
-            name="tags"
-            rows={8}
-            className="w-full flex-1 rounded-md border-2 border-blue-500 py-2 px-3 text-lg leading-6"
-            aria-invalid={actionData?.errors?.tags ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.tags ? "tags-error" : undefined
-            }
-            // defaultValue={data.article.tags}
-          />
-        </label>
-        {actionData?.errors?.tags && (
-          <div className="pt-1 text-red-700" id="tags-error">
-            {actionData.errors.tags}
-          </div>
-        )}
-      </div> */}
-
         <div className="text-right">
           <button
             type="submit"
@@ -243,25 +222,25 @@ export default function ArticleEditPage() {
       </Form>
       Tags:
       {data.article.tags.map((tag: ArticleTag) => (
-        <Form key={tag.id} method="post">
+        <Form key={tag.id} method="post" className="mx-5 inline">
           <input type="hidden" name="tagId" value={tag.id} />
-          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium capitalize text-gray-800">
+          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-lg font-medium capitalize text-gray-800">
             {tag.name}
           </span>
           <button
             type="submit"
             name="_action"
             value="delete_tag"
-            className="inline-flex items-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="inline-flex items-center rounded bg-white px-2.5 py-1.5 font-medium text-red-700 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             <TrashIcon />
           </button>
         </Form>
       ))}
-      <Form method="post">
+      <Form method="post" className="mt-10">
         <div>
           <label className="flex w-full flex-col gap-1">
-            <span>Tag: </span>
+            <span>Add a Tag: </span>
             <input
               ref={tagRef}
               name="tag"
