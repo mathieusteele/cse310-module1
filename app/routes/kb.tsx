@@ -97,7 +97,9 @@ export default function KnowledgebasePage() {
             <ol>
               {data.articleListItems
                 .filter((article) =>
-                  article.tags.find((tag) => tag.name.includes(searchTerm))
+                  article.tags.find((tag) =>
+                    tag.name.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
                 )
                 .map((article) => (
                   <li key={article.id}>
