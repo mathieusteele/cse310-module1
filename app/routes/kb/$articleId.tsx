@@ -42,13 +42,13 @@ export default function ArticleDetailsPage() {
   return (
     <div>
       <h3 className="text-2xl font-bold">{data.article.title}</h3>
-      <p className="py-6">{data.article.body}</p>
+      <p className="py-6 text-lg">{data.article.body}</p>
       <p className="py-6">
         Tags:{" "}
         {data.article.tags.map((tag: ArticleTag) => (
           <span
             key={tag.id}
-            className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium capitalize text-gray-800"
+            className="text-md mx-2 inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 font-medium capitalize text-gray-800"
           >
             {tag.name}
           </span>
