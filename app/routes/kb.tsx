@@ -38,6 +38,10 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function KnowledgebasePage() {
   const data = useLoaderData() as LoaderData;
+
+  // Sort articles alphabetically by title
+  data.articleListItems.sort((a, b) => (a.title > b.title ? 1 : -1));
+
   const [searchTerm, setSearchTerm] = React.useState("");
 
   return (
@@ -63,7 +67,7 @@ export default function KnowledgebasePage() {
               <label htmlFor="search" className="sr-only">
                 Filter
               </label>
-              <div className="relative rounded-md shadow-sm">
+              <div className="rounded-m relative mx-3 mb-5 shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <FilterIcon />
                 </div>
@@ -71,7 +75,7 @@ export default function KnowledgebasePage() {
                   type="search"
                   name="search"
                   id="search"
-                  className="block w-full rounded-md border-gray-300 pl-10 focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                  className="block w-full rounded-md border-gray-300 pl-10 focus:border-pink-500 focus:ring-pink-500 sm:text-lg"
                   placeholder="Search"
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event?.target.value)}
@@ -80,13 +84,6 @@ export default function KnowledgebasePage() {
             </div>
           </form>
 
-          {/* Filter:
-          <input
-            type="text"
-            name="searchTerm"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event?.target.value)}
-          /> */}
           <Link to="new" className="block p-4 text-xl text-blue-500">
             + Add
           </Link>
