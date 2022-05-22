@@ -1,45 +1,37 @@
 # Overview
 
-I am learning to build integrated web applications with Remix, a React Framework. I wanted to use this new framework to create a list of articles that will be how-tos to store important information and steps that a person should take to perform routine tasks.
+I have heard many people talking about the merits of Prisma as a cloud database tool with a good blend of usability and capability. It has been especially touted for it's developer friendly integrations with TypeScript. It is a natural fit for a Remix project and I decided that I would implement the backend / database for my knowledgebase project with Prisma.
 
-Collaborators who wish to install this project on their own computer should follow these steps:
+Knowledgebase was conceived as a personal knowledge management tool. It could be adapted in a corporate environment or implemented by an individual who wants to record paragraph-format content. The entries that are submitted to the knowledgebase as articles become searchable by the user that created them, so they can easily be referenced when needed. The article data is stored in a cloud database and protected behind a user authentication system. Upon logging in, a user is invited to create an article consisting of a title, body content, and tags. The tags are search indexed and are the way that the article content is recalled.
 
-- Set up your environment:
-- 
-  ```sh
-  npm run setup
-  ```
+I chose to build this knowledge management tool because at my workplace we use a MediaWiki installation for a team knowledge management and I wanted to see how difficult it would be to build a simplified version using some of the concepts of a wiki.
 
-- Start dev server:
+{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running, a walkthrough of the code, and a view of the cloud database.}
 
-  ```sh
-  npm run dev
-  ```
-- Open web browser to [http://localhost:3001](http://localhost:3001) to view the site.
+[Software Demo Video](http://youtube.link.goes.here)
 
-The demo video is available at: [Software Demo Video](https://youtu.be/1b-K10Y9A2A)
+# Cloud Database
 
-# Web Pages
+The cloud database that I am using is called Prisma. Prisma can integrate with well known data storage platforms and traditional databases including the popular MongoDB, Postgres, MySQL, SQLite, and others. By wrapping the CRUD operations with a simpler, safer javascript object-relational mapper (ORM), Prisma gives the developer an easy way to query data and perform mutations.
 
-The main page of the knowledgebase shows a list of links on the left side menu of the page. Upon selecting one of the menu choices, the corresponding article will be displayed in the pane on the right.
-
-At the top of the menu, there is a link to add an article. Clicking this link opens a form with the necessary fields that will be required for an article.
-
-With an article selected, it will be displayed and there will be action buttons to edit or delete it. The edit button will load a form with the article contents pre-filled into the form.
+The data structure includes tables for Users and a password table for authentication, there is a table of Articles, and lastly a table of ArticleTags. Each user can have multiple articles, and each article can have multiple tags.
 
 # Development Environment
 
-I used the indie stack of the remix framework for the react library. This primarily makes use of the TypeScript language to generate a React server-rendered application. The indie stack starter works similarly to django in some ways in that it gives some nice scaffolding to build an app.
+I developed the knowledgebase application with the Remix Indie Stack. I first built the web application pages individually with example data not using a database. This allowed me to lay out the application pages and identify where the forms should be and how they should work.
+
+More recently, the second phase of the project involved identifying the appropriate structure of the database to represent it in the Prisma Schema. The schema is the Prisma way of defining the shape of the data and the associated relations. After a few iterations, I think that the data schema is appropriately represented in this tool. I used Prisma Studio to visualize the database data to confirm that entries were showing up in the database and it was helpful when troubleshooting a mistake in one of my mutations.
+
+The programming for the database interactions was done predominantly in TypeScript.
 
 # Useful Websites
 
-* [Remix Run](https://remix.run/docs/en/v1)
-* [Tailwind](https://tailwindcss.com/)
-* [Indie Stack](https://github.com/remix-run/indie-stack)
+* [Prisma Docs](https://www.prisma.io/docs/)
+* [Remix Run Docs](https://remix.run/docs/en/v1)
 
 # Future Work
 
-* Store article content in a cloud database (prisma)
-* Populate the article list menu from the database instead of hard-coded.
-* make fancier controls for managing the article tag feature
-* implement a filtered search feature to quickly find articles that match a search term.
+* At present, the article content is displayed in one paragraph and it does not lend itself well to longer form content. I would like to implement some form of formatting options such as MarkDown or similar.
+* It would be nice if multiple users on a team could collaborate to maintain the article content.
+* With some artificial intelligence, It might be possible to automatically suggest appropriate tags that would be a good fit for article content.
+* Allowing images and hyperlinks would make this more useful as a wiki replacement.
