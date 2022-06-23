@@ -1,14 +1,15 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id         String       @id @default(cuid())
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
   email      String       @unique
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
@@ -18,29 +19,32 @@ model User {
 }
 
 model Password {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
   hash   String
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Article {
-  id        String       @id @default(cuid())
-  title     String
-  body      String
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  userId    String
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  tags      ArticleTag[]
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  body          String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  userId        String
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tags          ArticleTag[] @relation(fields: [articleTagIDs], references: [id])
+  articleTagIDs String[]     @db.ObjectId
 }
 
 model ArticleTag {
-  id        String    @id @default(cuid())
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  userId    String
-  articleId String?
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  articles  Article[]
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  userId     String
+  articleId  String?
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  articleIDs String[]  @db.ObjectId
+  articles   Article[] @relation(fields: [articleIDs], references: [id])
 }
