@@ -12,7 +12,7 @@ I chose to build this knowledge management tool because at my workplace we use a
 
 # Cloud Database
 
-The cloud database that I am using is called Prisma. Prisma can integrate with well known data storage platforms and traditional databases including the popular MongoDB, Postgres, MySQL, SQLite, and others. By wrapping the CRUD operations with a simpler, safer javascript object-relational mapper (ORM), Prisma gives the developer an easy way to query data and perform mutations.
+The cloud database that I am using is called MongoDB.
 
 The data structure includes tables for Users and a password table for authentication, there is a table of Articles, and lastly a table of ArticleTags. Each user can have multiple articles, and each article can have multiple tags.
 
